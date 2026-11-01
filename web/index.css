@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+/*
+ * One dark palette. Values live here once; Tailwind picks them up through the
+ * @theme block below, so a class like `bg-card` or `text-muted-foreground`
+ * resolves to these variables at runtime.
+ */
+:root {
+  /* Base corner radius: buttons and list rows. The 5..14 steps follow in @theme. */
+  --radius: 8px;
+
+  /* Desktop: near-black behind the background photo, near-white text. */
+  --background: #05060a;
+  --foreground: #e8eaf2;
+
+  /* Window surface. The frame adds a backdrop blur on top of this fill. */
+  --card: rgba(20, 22, 30, 0.55);
+  --card-foreground: #e8eaf2;
+
+  /* Dropdowns and popovers sit above windows, so they get a slightly denser fill. */
+  --popover: rgba(20, 22, 30, 0.55);
+  --popover-foreground: #e8eaf2;
+
+  /* Orange marks the active thing: current tab, focused window, primary button. */
+  --primary: #ffb060;
+  --primary-foreground: #05060a;
+
+  /* Raised quiet fill: toolbar buttons, secondary chips. */
+  --secondary: rgba(255, 255, 255, 0.05);
+  --secondary-foreground: #e8eaf2;
+
+  /* Status: progress, caution, board information, failure. */
+  --ok: #50e8a8;
+  --wrn: #ffb060;
+  --info: #5ad0ff;
+  --err: #ff5f58;
+
+  /* Aurora partner of the accent: gradients and poster placeholders. */
+  --acc2: #f05a5a;
+
+  /* Quiet text and quiet fills: table meta, section rows, inactive tabs. */
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted-foreground: rgba(232, 234, 242, 0.52);
+
+  /* Amber tint marks the active thing: open tab, focused control. */
+  --accent: rgba(255, 176, 96, 0.14);
+  --accent-foreground: #ffffff;
+
+  /* Red for failed jobs, board errors and delete actions. */
+  --destructive: #ff5f58;
+
+  /* Frame line (12%) is stronger than an inner divider (8%). */
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+
+  /* Focus ring around inputs and keyboard-focused controls. */
+  --ring: #ffb060;
+}
+
+/*
+ * Fill and hairline ramps named by their alpha value, so a class states the
+ * number it paints: `bg-glass-3`, `border-hair-8`. Literal values here keep
+ * the opacity modifiers (`bg-acc1/16`) working.
+ */
+@theme {
+  --color-glass-1: rgba(255, 255, 255, 0.01);
+  --color-glass-2: rgba(255, 255, 255, 0.02);
+  --color-glass-3: rgba(255, 255, 255, 0.03);
+  --color-glass-4: rgba(255, 255, 255, 0.04);
+  --color-glass-5: rgba(255, 255, 255, 0.05);
+  --color-glass-8: rgba(255, 255, 255, 0.08);
+
+  --color-hair-5: rgba(255, 255, 255, 0.05);
+  --color-hair-6: rgba(255, 255, 255, 0.06);
+  --color-hair-7: rgba(255, 255, 255, 0.07);
+  --color-hair-8: rgba(255, 255, 255, 0.08);
+  --color-hair-9: rgba(255, 255, 255, 0.09);
+  --color-hair-10: rgba(255, 255, 255, 0.1);
+  --color-hair-12: rgba(255, 255, 255, 0.12);
+
+  --color-window: rgba(20, 22, 30, 0.55);
+  --color-acc1: #ffb060;
+  --color-acc2: #f05a5a;
+  --color-ok: var(--ok);
+  --color-wrn: var(--wrn);
+  --color-info: var(--info);
+  --color-err: var(--err);
+}
+
+/*
+ * `inline` keeps the var() reference in the generated CSS instead of copying
+ * the value, so the palette stays editable at runtime.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Inter for UI, Space Grotesk for window titles and section headings,
+     JetBrains Mono for paths, sizes and counts in tables. */
+  --font-sans: "Inter Variable", ui-sans-serif, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* Chips 5, table cells 6, nav and search fields 7, rows and buttons 8,
+     notice boxes and status bar 10, windows and cards 12, dock 14. */
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 7px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-3xl: 12px;
+  --radius-4xl: 14px;
+}
+
+@layer base {
+  /* Every edge starts as a border in the palette colour; components pick a
+     width when they need a visible line. */
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    /* Native controls, scrollbars and form fields follow the dark palette. */
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    /* The full viewport height, handed down to the app root. */
+    height: 100%;
+  }
+
+  /* 13px base size: windows hold dense tables of releases and file lists. */
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Inter Variable", ui-sans-serif, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Translucent fill with the desktop blurred through it. Used by windows,
+     the dock and the status bar. */
+  .glass {
+    background: var(--muted);
+    backdrop-filter: blur(22px);
+  }
+
+  /* 8px scrollbar with an amber thumb, for the long tables in the areas. */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 176, 96, 0.35) transparent;
+  }
+
+  /* The box the thumb of a thin bar lives in. */
+  .scroll-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* The thumb, brighter under the cursor. */
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 176, 96, 0.3);
+    border-radius: 4px;
+  }
+
+  .scroll-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 176, 96, 0.55);
+  }
+
+  /* The square where a vertical and a horizontal bar meet. */
+  .scroll-thin::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Tracked caps in the display face: column headers and captions. */
+  .label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Key field of a key/value row. */
+  .label-tight {
+    font-family: var(--font-display);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+
+  /* Section head inside a detail panel. */
+  .label-section {
+    font-family: var(--font-display);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Eyebrow above a detail title. */
+  .label-eyebrow {
+    font-family: var(--font-display);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+}

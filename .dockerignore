@@ -1,0 +1,15 @@
+# images build from source, never from a working tree's leftovers
+node_modules
+**/node_modules
+data
+dist-release
+
+.git
+.env
+.env.*
+*.tgz
+*.log
+*.tsbuildinfo
+coverage
+.DS_Store
+.idea

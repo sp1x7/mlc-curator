@@ -1,0 +1,1 @@
+DROP TABLE `tmdb_settings`;

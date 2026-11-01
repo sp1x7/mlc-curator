@@ -1,0 +1,1 @@
+ALTER TABLE `tmdb_seasons` ADD `overview` text;
